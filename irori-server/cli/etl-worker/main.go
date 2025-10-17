@@ -12,9 +12,9 @@ import (
 )
 
 const (
-	extractWorker    = 2
-	transformWorker  = 2
-	loadWorker       = 1
+	extractWorker    = 4
+	transformWorker  = 4
+	loadWorker       = 2
 	chunkSize        = 5000
 	bulkSize         = 10000
 	extractChCount   = 5000
