@@ -1,0 +1,37 @@
+name: irori # プロジェクト名
+services:
+  db:
+    build:
+      context: ./docker/mysql
+    container_name: irori-db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - local_network
+  db2:
+    build:
+      context: ./docker/mysql
+    container_name: irori-db-2
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data2:/var/lib/mysql
+    networks:
+      - local_network
+
+volumes:
+  mysql_data:
+  mysql_data2:
+
+
+
+networks:
+  local_network:
