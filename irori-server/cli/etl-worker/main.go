@@ -117,7 +117,7 @@ func main() {
 	transformCh := make(chan etl.Record, transformChCount)
 	var wgE, wgT, wgL sync.WaitGroup
 
-	// --- Extract (並列) ---
+	// --- Extract (並行) ---
 	for i := 0; i < extractWorker; i++ {
 		rangeStart := minID + int64(i)*rangeSize
 		rangeEnd := rangeStart + rangeSize - 1
@@ -132,7 +132,7 @@ func main() {
 		}(i, i*chunkSize)
 	}
 
-	// --- Transform (並列) ---
+	// --- Transform (並行) ---
 	for i := 0; i < transformWorker; i++ {
 		wgT.Add(1)
 		go func(id int) {
@@ -141,7 +141,7 @@ func main() {
 		}(i)
 	}
 
-	// --- Load (並列) ---
+	// --- Load (並行) ---
 	for i := 0; i < loadWorker; i++ {
 		wgL.Add(1)
 		go func(id int) {
