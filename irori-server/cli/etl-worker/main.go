@@ -82,7 +82,6 @@ func parseDateRange(startAtStr, endAtStr string) (time.Time, time.Time, error) {
 }
 
 func main() {
-	now := time.Now()
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
@@ -158,7 +157,4 @@ func main() {
 	wgL.Wait()
 
 	log.Println("ETLが完了しました")
-	endNow := time.Now()
-
-	fmt.Println(now.Format("2006-01-02 15:04:05"), "~", endNow.Format("2006-01-02 15:04:05"))
 }
